@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        header {
+            text-align: center;
+        }
+        .weather-info {
+            text-align: center;
+            font-size: 40px;
+        }
+        .jokes {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .advice {
+            margin-top: 30px;
+            text-align: center;
+        }
+        body {
+            background-color: lightpink;
+        }
+        {% if weather_info[0] == "Sunny" %}
+        body {
+            background-color: lightyellow;
+        }
+        {% elif weather_info[0] == "Windy" %}
+        body {
+            background-color: lightblue;
+        }
+        {% elif weather_info[0] == "Rainy" %}
+        body {
+            background-color: lightgrey;
+        }
+        {% endif %}
+    </style>
+
+    <div class="weather-info">
+        <h2>Weather Information</h2>
+        <p>Weather: {{ weather_info[0] }}</p>
+        <p>Precipitation: {% if weather_info[1] %}Yes{% else %}No{% endif %}</p>
+        <p>Daytime: {% if weather_info[2] %}Yes{% else %}No{% endif %}</p>
+        <p>Temperature: {{ weather_info[3] }}°F</p>
+    </div>
+
+    {% if weather_info[0] == "Sunny" %}
+    <div class="jokes">
+        <h2>Shine Some Humor</h2>
+        <p>Why did the sun not have to go to college and apply for jobs directly after high school? He already has a million degrees.</p>
+    </div>
+    {% elif weather_info[0] == "Windy" %}
+    <div class="jokes">
+        <h2>Wind Some Humor</h2>
+        <p>How do you stop newspaper from flying away on a windy day? Use a news anchor.</p>
+    </div>
+    {% elif weather_info[0] == "Rainy" %}
+    <div class="jokes">
+        <h2>Rain Some Humor</h2>
+        <p>What do you call a pile of coins in the rain? Climate change.</p>
+    </div>
+    {% elif weather_info[0] == "Cloudy" %}
+    <div class="jokes">
+        <h2>Cloud Some Humor</h2>
+        <p>Why did the cloud stay calm during the storm? Because it didn’t want to precipitate things.</p>
+    </div>
+    {% endif %}
+
+    {% if weather_info[3] < 40 %}
+    <div class="advice">
+        <h2>Dressing Advice</h2>
+        <p>It's cold outside, put your jacket on.</p>
+    </div>
+    {% elif 40 <= weather_info[3] < 60 %}
+    <div class="advice">
+        <h2>Dressing Advice</h2>
+        <p>Very pleasant weather, show your fashion.</p>
+    </div>
+    {% elif weather_info[3] > 60 %}
+    <div class="advice">
+        <h2>Dressing Advice</h2>
+        <p>It's hot outside, dress lightly.</p>
+    </div>
+    {% endif %}
+{% endblock %}
